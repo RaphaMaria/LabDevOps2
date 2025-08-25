@@ -15,10 +15,13 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: validate # só roda se a validação passar
+    permissions:
+      contents: write   # precisa para publicar no GitHub Pages
     steps:
       - uses: actions/checkout@v3
       - name: Deploy no GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
+          publish_branch: gh-pages   # branch usada pelo Pages
+          publish_dir: ./            # ajuste se seus arquivos estiverem em outra pasta
